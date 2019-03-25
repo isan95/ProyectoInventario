@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  * @author POLANCO
  */
 public class Conexion {
-    private static final String nameDb="login";
+    private static final String nameDb="Inventario";
     private static final String userDb="root";
     private static final String passwordDb="";
     private static final String urlDb="jdbc:mysql://localhost:3306/"+nameDb;

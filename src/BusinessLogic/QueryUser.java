@@ -27,7 +27,7 @@ public class QueryUser {
     rs = null;
     boolean found = false;
     Connection conControllerG= Conexion.getConecction();
-    String sql = "SELECT * FROM user WHERE Nick=?";
+    String sql = "SELECT * FROM userinventario WHERE Nick=?";
     try{
         pqg = conControllerG.prepareStatement(sql);
         pqg.setString(1,usr.getNick());
@@ -47,7 +47,7 @@ public class QueryUser {
     public boolean insertUser(User usr){
         PreparedStatement pqi= null;
         Connection conControllerI = Conexion.getConecction();
-        String sql="INSERT INTO user (Nick,Password) VALUES (?,?)";
+        String sql="INSERT INTO userinventario (Nick,Password) VALUES (?,?)";
         try{
             pqi = conControllerI.prepareStatement(sql);
             pqi.setString(1, usr.getNick());
@@ -72,14 +72,14 @@ public class QueryUser {
     rs = null;
     boolean found = false;
     Connection conControllerG= Conexion.getConecction();
-    String sql = "SELECT * FROM user WHERE Nick=?";
+    String sql = "SELECT Nick, Password, Rol FROM userinventario WHERE Nick=?";
     try{
         pqg = conControllerG.prepareStatement(sql);
         pqg.setString(1,usr.getNick());
         rs = pqg.executeQuery();
     
         if(rs.next()){
-            if(usr.getPassword().equals(rs.getString(2))){
+            if(usr.getPassword().equals(rs.getString(2)) && usr.getRol()==1){
                 usr.setNick(rs.getString(1));
                 usr.setPassword(rs.getString(2));
                 found=true;

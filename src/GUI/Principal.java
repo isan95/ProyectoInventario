@@ -34,6 +34,8 @@ public class Principal extends javax.swing.JFrame {
         jLabelPassword = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jButtonStartSesion = new javax.swing.JButton();
+        jLabelPassword1 = new javax.swing.JLabel();
+        jComboBoxRol = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(0, 0));
@@ -72,6 +74,12 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jLabelPassword1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelPassword1.setText("Rol");
+
+        jComboBoxRol.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jComboBoxRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Usuario" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -84,11 +92,17 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(74, 74, 74)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelUser)
-                            .addComponent(jLabelPassword))
-                        .addGap(86, 86, 86)
+                            .addComponent(jLabelPassword)
+                            .addComponent(jLabelPassword1))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldUser, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(86, 86, 86)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldUser, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(97, 97, 97)
+                                .addComponent(jComboBoxRol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(85, 85, 85)
                         .addComponent(jLabelTitleLogin))
@@ -112,10 +126,14 @@ public class Principal extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabelPassword)
                             .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(36, 36, 36)
-                        .addComponent(jButtonStartSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelPassword1)
+                            .addComponent(jComboBoxRol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonStartSesion, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
                     .addComponent(jLabel1))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -129,9 +147,14 @@ public class Principal extends javax.swing.JFrame {
        QueryUser qu = new QueryUser();
        User usr = new User();
        String pass = new String(jPasswordField.getPassword());
+       int rol=2;
+       if(jComboBoxRol.getSelectedItem().toString()=="Administrador"){
+           rol=1;
+       }
        if(!jTextFieldUser.getText().equals("") && !pass.equals("")){
            usr.setNick(jTextFieldUser.getText());
            usr.setPassword(pass);
+           usr.setRol(rol);
            if(qu.login(usr)){
                this.dispose();
                frmHome = new Home();
@@ -181,8 +204,10 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton jButtonStartSesion;
+    private javax.swing.JComboBox<String> jComboBoxRol;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelPassword;
+    private javax.swing.JLabel jLabelPassword1;
     private javax.swing.JLabel jLabelTitleLogin;
     private javax.swing.JLabel jLabelUser;
     public javax.swing.JPasswordField jPasswordField;
