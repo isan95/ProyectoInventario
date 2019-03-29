@@ -15,6 +15,15 @@ public class Product {
     private String description;
     private int price;
     private String unitMeasure;
+    private int stock;
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
 
     public String getIdProduct() {
         return idProduct;
