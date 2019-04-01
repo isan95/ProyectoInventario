@@ -102,4 +102,43 @@ public class QueryProduct {
         }
         return rs;
     }
+    
+    public boolean updateProduct(Product pro, String idProduct){
+        PreparedStatement pqu = null;
+        boolean updated = false; 
+        
+        String sql = "UPDATE product SET nameProduct = ?, description = ?, price = ?, unitMeasurement = ?, stock = ? WHERE IdProduct = '"+idProduct+"'";
+        try{
+            this.conProduct = Conexion.getConecction();
+            pqu = this.conProduct.prepareStatement(sql);
+            pqu.setString(1, pro.getNameProduct());
+            pqu.setString(2, pro.getDescription());
+            pqu.setInt(3, pro.getPrice());
+            pqu.setString(4, pro.getUnitMeasure());
+            pqu.setInt(5, pro.getStock());
+            pqu.execute();
+            updated = true;
+        }catch(SQLException e){
+            System.err.print(e);
+        }
+        return updated;
+    }
+    
+    public boolean deleteProduct(String idProduct)
+               {
+                     PreparedStatement pqu = null;
+                   boolean delete = false;
+                   String sql = "DELETE  FROM product WHERE IdProduct = '"+idProduct+"'";
+                    try{
+            this.conProduct = Conexion.getConecction();
+            pqu = this.conProduct.prepareStatement(sql);
+             pqu.execute();
+             delete = true;
+                    }catch(SQLException e){
+                        System.err.print(e);
+                    }
+                               
+                   return delete;
+}
+    
 }

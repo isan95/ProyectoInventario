@@ -7,6 +7,7 @@ package GUI;
 import BusinessLogic.QueryUser;
 import Data.User;
 import javax.swing.JOptionPane;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -63,7 +64,6 @@ public class Principal extends javax.swing.JFrame {
         jLabelPassword.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelPassword.setText("Contraseña");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\POLANCO\\Documents\\NetBeansProjects\\ProyectoInventario\\inventarios.jpg")); // NOI18N
         jLabel1.setText("jLabel1");
 
         jButtonStartSesion.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -147,13 +147,18 @@ public class Principal extends javax.swing.JFrame {
        QueryUser qu = new QueryUser();
        User usr = new User();
        String pass = new String(jPasswordField.getPassword());
-       int rol=2;
-       if(jComboBoxRol.getSelectedItem().toString()=="Administrador"){
+       int rol=0;
+       if(jComboBoxRol.getSelectedItem().toString().equals("Administrador")){
            rol=1;
+       }
+       else{
+           if(jComboBoxRol.getSelectedItem().toString().equals("Usuario")){
+               rol=2;
+           }
        }
        if(!jTextFieldUser.getText().equals("") && !pass.equals("")){
            usr.setNick(jTextFieldUser.getText());
-           usr.setPassword(pass);
+           usr.setPassword(DigestUtils.sha1Hex(pass));
            usr.setRol(rol);
            if(qu.login(usr)){
                this.dispose();
