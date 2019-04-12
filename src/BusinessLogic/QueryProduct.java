@@ -20,95 +20,94 @@ import java.util.logging.Logger;
  * @author POLANCO
  */
 public class QueryProduct {
+
     Connection conProduct;
     ResultSet rs;
     int cantProduct;
 
     public int getCantProduct() {
         return cantProduct;
-    }   
-    
-    public boolean insertProduct(Product pro){
+    }
+
+    public boolean insertProduct(Product pro) {
         PreparedStatement pqp = null;
         this.conProduct = Conexion.getConecction();
         String sql = "INSERT INTO product (idProduct,nameProduct,description,price,unitMeasurement,stock) VALUES (?,?,?,?,?,?)";
-        try{
+        try {
             pqp = conProduct.prepareStatement(sql);
-            pqp.setString(1,pro.getIdProduct());
-            pqp.setString(2,pro.getNameProduct());
-            pqp.setString(3,pro.getDescription());
-            pqp.setInt(4,pro.getPrice());
-            pqp.setString(5,pro.getUnitMeasure());
-            pqp.setInt(6,pro.getStock());
+            pqp.setString(1, pro.getIdProduct());
+            pqp.setString(2, pro.getNameProduct());
+            pqp.setString(3, pro.getDescription());
+            pqp.setInt(4, pro.getPrice());
+            pqp.setString(5, pro.getUnitMeasure());
+            pqp.setInt(6, pro.getStock());
             pqp.execute();
             return true;
-            
+
         } catch (SQLException e) {
             System.err.print(e);
             return false;
-        }finally{
-        try{
-        conProduct.close();
-        }catch(SQLException e){
-        System.err.print(e);
+        } finally {
+            try {
+                conProduct.close();
+            } catch (SQLException e) {
+                System.err.print(e);
+            }
         }
     }
-    }
-    
-    public ResultSet getProducts(){
+
+    public ResultSet getProducts() {
         PreparedStatement pqp = null;
         this.conProduct = Conexion.getConecction();
         String sql = "SELECT idProduct, nameProduct, description, price, unitMeasurement, stock FROM product";
-        try{
+        try {
             pqp = conProduct.prepareStatement(sql);
             rs = pqp.executeQuery();
             ResultSetMetaData rsMd = rs.getMetaData();
             cantProduct = rsMd.getColumnCount();
-                        
+
         } catch (SQLException e) {
             System.err.print(e);
         }
         return rs;
     }
-    
-    public void closeConnection(){
-        try{
+
+    public void closeConnection() {
+        try {
             this.conProduct.close();
-        }
-        catch(SQLException e){
+        } catch (SQLException e) {
             System.err.print(e);
         }
     }
-    
-    public ResultSet getProductForWhere(String attribute, String value){
+
+    public ResultSet getProductForWhere(String attribute, String value) {
         PreparedStatement pqw = null;
         String sql = null;
         this.conProduct = Conexion.getConecction();
-        if(attribute.equals("Nombre")){
-             sql = "SELECT * FROM Product WHERE nameProduct"+" = '"+value+"'";
-            }
-        else{
-            if(attribute.equals("Codigo")){
-                sql = "SELECT * FROM Product WHERE idProduct"+" = "+Integer.parseInt(value);
+        if (attribute.equals("Nombre")) {
+            sql = "SELECT * FROM Product WHERE nameProduct" + " = '" + value + "'";
+        } else {
+            if (attribute.equals("Codigo")) {
+                sql = "SELECT * FROM Product WHERE idProduct" + " = " + Integer.parseInt(value);
             }
         }
-        try{
+        try {
             pqw = this.conProduct.prepareStatement(sql);
             rs = pqw.executeQuery();
             ResultSetMetaData rsMd = rs.getMetaData();
             cantProduct = rsMd.getColumnCount();
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.err.print(e);
         }
         return rs;
     }
-    
-    public boolean updateProduct(Product pro, String idProduct){
+
+    public boolean updateProduct(Product pro, String idProduct) {
         PreparedStatement pqu = null;
-        boolean updated = false; 
-        
-        String sql = "UPDATE product SET nameProduct = ?, description = ?, price = ?, unitMeasurement = ?, stock = ? WHERE IdProduct = '"+idProduct+"'";
-        try{
+        boolean updated = false;
+
+        String sql = "UPDATE product SET nameProduct = ?, description = ?, price = ?, unitMeasurement = ?, stock = ? WHERE IdProduct = '" + idProduct + "'";
+        try {
             this.conProduct = Conexion.getConecction();
             pqu = this.conProduct.prepareStatement(sql);
             pqu.setString(1, pro.getNameProduct());
@@ -118,27 +117,26 @@ public class QueryProduct {
             pqu.setInt(5, pro.getStock());
             pqu.execute();
             updated = true;
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.err.print(e);
         }
         return updated;
     }
-    
-    public boolean deleteProduct(String idProduct)
-               {
-                     PreparedStatement pqu = null;
-                   boolean delete = false;
-                   String sql = "DELETE  FROM product WHERE IdProduct = '"+idProduct+"'";
-                    try{
+
+    public boolean deleteProduct(String idProduct) {
+        PreparedStatement pqu = null;
+        boolean delete = false;
+        String sql = "DELETE  FROM product WHERE IdProduct = '" + idProduct + "'";
+        try {
             this.conProduct = Conexion.getConecction();
             pqu = this.conProduct.prepareStatement(sql);
-             pqu.execute();
-             delete = true;
-                    }catch(SQLException e){
-                        System.err.print(e);
-                    }
-                               
-                   return delete;
-}
-    
+            pqu.execute();
+            delete = true;
+        } catch (SQLException e) {
+            System.err.print(e);
+        }
+
+        return delete;
+    }
+
 }

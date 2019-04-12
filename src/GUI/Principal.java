@@ -15,7 +15,9 @@ import org.apache.commons.codec.digest.DigestUtils;
  */
 public class Principal extends javax.swing.JFrame {
     Home frmHome;
+    HomeUser frmHomeUser;
     public Principal() {
+        this.setLocationRelativeTo(null);
         initComponents();
     }
 
@@ -160,11 +162,17 @@ public class Principal extends javax.swing.JFrame {
            usr.setNick(jTextFieldUser.getText());
            usr.setPassword(DigestUtils.sha1Hex(pass));
            usr.setRol(rol);
-           if(qu.login(usr)){
+           if(qu.login(usr) && usr.getRol()==1){
                this.dispose();
                frmHome = new Home();
                frmHome.setVisible(true);
                frmHome.setLocationRelativeTo(null);
+           }
+           if(qu.login(usr) && usr.getRol()==2){
+               this.dispose();
+               frmHomeUser = new HomeUser();
+               frmHomeUser.setVisible(true);
+               frmHomeUser.setLocationRelativeTo(null);
            }
            else{
            JOptionPane.showMessageDialog(null,"Datos incorrectos");
