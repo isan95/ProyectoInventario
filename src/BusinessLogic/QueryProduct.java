@@ -85,10 +85,10 @@ public class QueryProduct {
         String sql = null;
         this.conProduct = Conexion.getConecction();
         if (attribute.equals("Nombre")) {
-            sql = "SELECT * FROM Product WHERE nameProduct" + " = '" + value + "'";
+            sql = "SELECT * FROM Product WHERE nameProduct LIKE" + "'" + value + "%'";
         } else {
             if (attribute.equals("Codigo")) {
-                sql = "SELECT * FROM Product WHERE idProduct" + " = " + Integer.parseInt(value);
+                sql = "SELECT * FROM Product WHERE idProduct LIKE" + "'" +value+"%'";
             }
         }
         try {
