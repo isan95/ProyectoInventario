@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class AddProduct extends javax.swing.JDialog {
     private String[] values;
+    private javax.swing.table.DefaultTableModel model;
 
     public String[] getValues() {
         return values;
@@ -72,20 +73,20 @@ public class AddProduct extends javax.swing.JDialog {
 
         jTableAddProduct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Codigo", "Nombre", "Precio", "Disponibilidad"
+                "Codigo", "Nombre", "Descripción", "Precio", "Unidad de medida", "Disponibilidad"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -102,11 +103,6 @@ public class AddProduct extends javax.swing.JDialog {
         jButtonAddProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAddProductActionPerformed(evt);
-            }
-        });
-        jButtonAddProduct.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAddProductUpdateModel(evt, new DefaultTableModel() );
             }
         });
 
@@ -159,16 +155,8 @@ public class AddProduct extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    public void updateTableModel(javax.swing.table.DefaultTableModel model){
-        model.addRow(values);
-    }
-    private void jButtonAddProductUpdateModel(java.awt.event.ActionEvent evt,javax.swing.table.DefaultTableModel model){
-        if(evt.getSource() == jButtonAddProduct){
-            updateTableModel(model);
-        }
-    }
     private void jTextSearchProductAddKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextSearchProductAddKeyTyped
-        javax.swing.table.DefaultTableModel model = new javax.swing.table.DefaultTableModel();
+        model = new javax.swing.table.DefaultTableModel();
         jTableAddProduct.setModel(model);
         model.addColumn("Codigo");
         model.addColumn("Nombre");
@@ -196,13 +184,15 @@ public class AddProduct extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextSearchProductAddKeyTyped
 
     private void jButtonAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddProductActionPerformed
-        int row = jTableAddProduct.getSelectedRow();
-        values = new String[6];
-        if (row >= 0) {
-            for (int i = 0; i < 6; i++) {
-                values[i] = jTableAddProduct.getValueAt(row, i).toString();
-            }
-        }
+       DefaultTableModel model = (DefaultTableModel) HomeUser.getjTableDetal().getModel();
+       int row = jTableAddProduct.getSelectedRow();
+       values = new String[jTableAddProduct.getColumnCount()];
+       if(row>=0){
+           for(int i=0;i<jTableAddProduct.getColumnCount()-1;i++){
+               values[i] =  jTableAddProduct.getValueAt(row, i).toString();
+           }
+        model.addRow(values);
+       }
         
     }//GEN-LAST:event_jButtonAddProductActionPerformed
 

@@ -30,6 +30,7 @@ public class Home extends javax.swing.JFrame {
     Update frmUpdate;
     UpdateUser frmUpdateUser;
     UpdateProvide frmUpdateProvide;
+    String user;
 
     /**
      * Creates new form Home
@@ -823,6 +824,16 @@ public class Home extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+   
+    
     private boolean checkMail(String mail) {
         String emailPattern = "^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@"
                 + "[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$";

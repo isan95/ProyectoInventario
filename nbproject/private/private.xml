@@ -3,10 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/POLANCO/Documents/NetBeansProjects/ProyectoInventario/src/BusinessLogic/QueryBillProduct.java</file>
             <file>file:/C:/Users/POLANCO/Documents/NetBeansProjects/ProyectoInventario/src/GUI/AddProduct.java</file>
             <file>file:/C:/Users/POLANCO/Documents/NetBeansProjects/ProyectoInventario/src/GUI/Home.java</file>
             <file>file:/C:/Users/POLANCO/Documents/NetBeansProjects/ProyectoInventario/src/BusinessLogic/QueryProduct.java</file>
+            <file>file:/C:/Users/POLANCO/Documents/NetBeansProjects/ProyectoInventario/src/Data/Bill.java</file>
+            <file>file:/C:/Users/POLANCO/Documents/NetBeansProjects/ProyectoInventario/src/BusinessLogic/QueryUser.java</file>
             <file>file:/C:/Users/POLANCO/Documents/NetBeansProjects/ProyectoInventario/src/GUI/HomeUser.java</file>
+            <file>file:/C:/Users/POLANCO/Documents/NetBeansProjects/ProyectoInventario/src/BusinessLogic/QueryBill.java</file>
+            <file>file:/C:/Users/POLANCO/Documents/NetBeansProjects/ProyectoInventario/src/Data/BillProduct.java</file>
             <file>file:/C:/Users/POLANCO/Documents/NetBeansProjects/ProyectoInventario/src/BusinessLogic/QueryClient.java</file>
             <file>file:/C:/Users/POLANCO/Documents/NetBeansProjects/ProyectoInventario/src/Data/Client.java</file>
         </group>

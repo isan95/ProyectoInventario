@@ -167,12 +167,14 @@ public class Principal extends javax.swing.JFrame {
                frmHome = new Home();
                frmHome.setVisible(true);
                frmHome.setLocationRelativeTo(null);
+               frmHome.setUser(jTextFieldUser.getText());
            }
            if(qu.login(usr) && usr.getRol()==2){
                this.dispose();
                frmHomeUser = new HomeUser();
                frmHomeUser.setVisible(true);
                frmHomeUser.setLocationRelativeTo(null);
+               frmHomeUser.setUser(jTextFieldUser.getText());
            }
            else{
            JOptionPane.showMessageDialog(null,"Datos incorrectos");

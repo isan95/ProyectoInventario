@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 23-04-2019 a las 15:57:59
+-- Tiempo de generación: 26-04-2019 a las 18:34:54
 -- Versión del servidor: 5.7.24
 -- Versión de PHP: 7.2.14
 
@@ -33,10 +33,60 @@ USE inventario;
 DROP TABLE IF EXISTS bill;
 CREATE TABLE bill (
   id_bill bigint(20) NOT NULL,
-  date date NOT NULL,
-  id_client varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  date datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  id_client varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   id_seller varchar(20) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla bill
+--
+
+INSERT INTO bill (id_bill, `date`, id_client, id_seller) VALUES
+(7, '2019-04-25 20:38:47', '105044548', 'MariaIsabel'),
+(6, '2019-04-25 20:37:25', '105044548', 'MariaIsabel'),
+(5, '2019-04-25 20:31:51', '15564652', 'MariaIsabel'),
+(8, '2019-04-25 20:55:16', '15564652', 'MariaIsabel'),
+(9, '2019-04-25 21:05:48', '1230651453', 'MariaIsabel'),
+(10, '2019-04-25 21:26:50', '105044548', 'MariaIsabel'),
+(11, '2019-04-25 21:28:30', '105044548', 'MariaIsabel'),
+(12, '2019-04-26 10:41:14', '15564652', 'MariaIsabel'),
+(13, '2019-04-26 10:45:41', '15564652', 'MariaIsabel'),
+(14, '2019-04-26 10:48:57', '15564652', 'MariaIsabel'),
+(15, '2019-04-26 11:07:59', '15564652', 'MariaIsabel'),
+(16, '2019-04-26 11:14:17', '105044548', 'MariaIsabel'),
+(17, '2019-04-26 11:22:07', '105044548', 'MariaIsabel'),
+(18, '2019-04-26 11:30:02', '105005465', 'MariaIsabel'),
+(19, '2019-04-26 12:56:58', '105005465', 'MariaIsabel');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla bill_product
+--
+
+DROP TABLE IF EXISTS bill_product;
+CREATE TABLE bill_product (
+  id_bill bigint(20) NOT NULL,
+  IdProduct varchar(10) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla bill_product
+--
+
+INSERT INTO bill_product (id_bill, IdProduct) VALUES
+(0, '10006'),
+(0, '10002'),
+(0, '10003'),
+(0, '10006'),
+(0, '10002'),
+(0, '10006'),
+(0, '10002'),
+(0, '10006'),
+(0, '10003'),
+(0, '10002'),
+(0, '10006');
 
 -- --------------------------------------------------------
 
@@ -61,7 +111,8 @@ CREATE TABLE `client` (
 INSERT INTO `client` (Document, name_client, first_lastName_client, last_lastName_cliente, phone_client, email_client) VALUES
 ('105005465', 'kdjbvg', 'kljnbvkdjfh', 'jnb', '302152654', 'kjdsvbsdkj@fdskjvb.com'),
 ('1230651453', 'Eso', 'Polanco', '', '', ''),
-('105044548', 'Ismael', 'Polanco', '', '', 'iapolancop@gmail.com');
+('105044548', 'Ismael', 'Polanco', '', '', 'iapolancop@gmail.com'),
+('15564652', 'Fernado', 'Bolaños', '', '3689635478', '');
 
 -- --------------------------------------------------------
 
@@ -180,6 +231,13 @@ CREATE TABLE userinventario (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
+-- Volcado de datos para la tabla userinventario
+--
+
+INSERT INTO userinventario (document_user, Nick, `Password`, Nombre, Primer apellido, Segundo apellido, Rol) VALUES
+('1002568', 'MariaIsabel', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'Maria', 'Martinez', 'De Polanco', 2);
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -187,7 +245,16 @@ CREATE TABLE userinventario (
 -- Indices de la tabla bill
 --
 ALTER TABLE bill
-  ADD PRIMARY KEY (id_bill);
+  ADD PRIMARY KEY (id_bill),
+  ADD KEY id_client (id_client),
+  ADD KEY id_seller (id_seller);
+
+--
+-- Indices de la tabla bill_product
+--
+ALTER TABLE bill_product
+  ADD KEY id_bill (id_bill),
+  ADD KEY IdProduct (IdProduct);
 
 --
 -- Indices de la tabla `client`
@@ -236,7 +303,7 @@ ALTER TABLE userinventario
 -- AUTO_INCREMENT de la tabla bill
 --
 ALTER TABLE bill
-  MODIFY id_bill bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY id_bill bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla type_provide
