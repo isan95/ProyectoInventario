@@ -187,6 +187,7 @@ public class AddProduct extends javax.swing.JDialog {
        DefaultTableModel model = (DefaultTableModel) HomeUser.getjTableDetal().getModel();
        int row = jTableAddProduct.getSelectedRow();
        values = new String[jTableAddProduct.getColumnCount()];
+       values[jTableAddProduct.getColumnCount()-1] = "1";
        if(row>=0){
            for(int i=0;i<jTableAddProduct.getColumnCount()-1;i++){
                values[i] =  jTableAddProduct.getValueAt(row, i).toString();

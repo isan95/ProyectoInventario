@@ -20,13 +20,14 @@ public class QueryBillProduct {
     private ResultSet rs;
     
     public boolean insertBillProduc(BillProduct bp){
-        String sql = "INSERT INTO Bill_product (ID_BILL, IDPRODUCT) VALUES (?,?)";
+        String sql = "INSERT INTO Bill_product (ID_BILL, IDPRODUCT,cant) VALUES (?,?,?)";
         PreparedStatement ps;
         try{
             connBillProduct = Conexion.getConecction();
             ps = connBillProduct.prepareStatement(sql);
             ps.setInt(1,bp.getNBill());
             ps.setString(2, bp.getIdProduct());
+            ps.setInt(3, bp.getCant());
             ps.execute();
             return true;
         }catch(SQLException e){

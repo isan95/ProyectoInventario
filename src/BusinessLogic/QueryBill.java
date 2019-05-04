@@ -19,41 +19,32 @@ import java.sql.SQLException;
 public class QueryBill {
      private Connection connBill;
      private ResultSet rs;
-     public int  getLastIdBill(){
-        int rsi = 0;
+     
+     public ResultSet  getLastIdBill(){
         connBill = Conexion.getConecction();
-        String sql = "SELECT COUNT(@@IDENTITY AS id_bill) FROM Bill";
         PreparedStatement ps = null;
-        try{
-            ps = connBill.prepareStatement(sql);
-            rs = ps.executeQuery();
-            if(rs.getInt(1)==1){
-                sql = "SELECT @@IDENTITY AS id_bill FROM Bill";
+        String sql = "SELECT MAX(id_bill) AS lastIdBill FROM Bill";
                 try{
                     ps = connBill.prepareStatement(sql);
                     rs = ps.executeQuery();
-                    rsi = rs.getInt(1);
                 }catch(SQLException e){
                     System.err.println(e.getMessage());
                     System.err.println(e.getLocalizedMessage());
                 }
-                
-            }
-        }catch(SQLException e){
-            System.err.println(e.getMessage());
-            System.err.println(e.getLocalizedMessage());
-        }
-        return rsi;
+        return rs;
     }
      
      public boolean insertBill(Bill bill){
-         String sql = "INSERT INTO Bill (id_client, id_seller) VALUES (?,?)";
+         String sql = "INSERT INTO Bill (id_client, id_seller,subtotal,iva,total) VALUES (?,?,?,?,?)";
          PreparedStatement ps = null;
          try{
              connBill = Conexion.getConecction();
              ps = connBill.prepareStatement(sql);
              ps.setString(1, bill.getClient());
              ps.setString(2,bill.getUser());
+             ps.setInt(3,bill.getSubtotal());
+             ps.setInt(4,bill.getIva());
+             ps.setInt(5,bill.getTotal());
              ps.execute();
              return true;
          }catch(SQLException e){

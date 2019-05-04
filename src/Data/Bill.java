@@ -12,11 +12,40 @@ import java.util.Date;
  * @author POLANCO
  */
 public class Bill {
-    int NBill;
-    String client;
-    String user;
-    Date data;
+    private int NBill;
+    private String client;
+    private String user;
+    private Date data;
+    private int subtotal;
+    private int iva;
+    private int total;
 
+    public int getSubtotal() {
+        return subtotal;
+    }
+    
+    public void setSubtotal(int subtotal) {
+        this.subtotal = subtotal;
+    }
+
+    public int getIva() {
+        return iva;
+    }
+
+    public void setIva(int iva) {
+        this.iva = iva;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+    
+    
+    
     public int getNBill() {
         return NBill;
     }

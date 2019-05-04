@@ -12,7 +12,18 @@ package Data;
 public class BillProduct {
     int NBill;
     String idProduct;
+    int cant;
 
+    public int getCant() {
+        return cant;
+    }
+
+    public void setCant(int cant) {
+        this.cant = cant;
+    }
+    
+    
+    
     public int getNBill() {
         return NBill;
     }
