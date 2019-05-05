@@ -12,6 +12,12 @@ import BusinessLogic.QueryBillProduct;
 import Data.Bill;
 import Data.BillProduct;
 import Data.Client;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.EventListener;
@@ -29,12 +35,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author POLANCO
  */
-public class HomeUser extends javax.swing.JFrame {
+public class HomeUser extends javax.swing.JFrame implements Printable{
 
     private AddProduct frmAddProduct;
     private javax.swing.table.DefaultTableModel modelDetal;
     private String user;
     private int subtotal=0;
+    private GenerateCheckIn generatedCheckIn = new GenerateCheckIn();
     /**
      * Creates new form HomeUser
      */
@@ -52,6 +59,29 @@ public class HomeUser extends javax.swing.JFrame {
 
     public void setUser(String user) {
         this.user = user;
+    }
+
+    @Override
+    public int print(Graphics grphcs, PageFormat pf, int i) throws PrinterException {
+        
+        int cantProduct = modelDetal.getRowCount();
+        generatedCheckIn.setjTextClient(jTextClientSelected);
+        generatedCheckIn.setjTextSubTotal(jTextSubTotal);
+        generatedCheckIn.setjTextTotal(jTextTotal);
+        generatedCheckIn.setjTextIVA(jTextIVA);
+        for(int a=0;a<cantProduct;a++){
+            generatedCheckIn.getjTableProductCheckIn().getModel().setValueAt(modelDetal.getValueAt(a, 5), a, 0);//Agrega la cantidad
+            generatedCheckIn.getjTableProductCheckIn().getModel().setValueAt(modelDetal.getValueAt(a, 1), a, 1);//Agrega el no bre del producto
+        }
+        
+        if(i>0){
+            return NO_SUCH_PAGE;
+        }
+        Graphics2D grphCheckIn = (Graphics2D)grphcs;
+        grphCheckIn.translate(pf.getImageableX()+10,pf.getImageableY()+10);
+        grphCheckIn.scale(1.0, 1.0);
+        generatedCheckIn.printAll(grphcs);
+        return PAGE_EXISTS;
     }
 
     private class TableModel extends DefaultTableModel {
@@ -851,6 +881,16 @@ public class HomeUser extends javax.swing.JFrame {
                 bp.setIdProduct(elementId[j]);
                 bp.setCant(elementCant[j]);
                 qbp.insertBillProduc(bp);
+            }
+            PrinterJob pj = PrinterJob.getPrinterJob();
+            pj.setPrintable(this);
+            boolean top = pj.printDialog();
+            if(top){
+                try {
+                    pj.print();
+                } catch (PrinterException ex) {
+                    Logger.getLogger(HomeUser.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             JOptionPane.showMessageDialog(this,"Factura registrada correctamente");
         }
