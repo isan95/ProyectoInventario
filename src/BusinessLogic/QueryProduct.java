@@ -71,6 +71,29 @@ public class QueryProduct {
         }
         return rs;
     }
+    public ResultSet getProductsIn(String attribute, String value){
+        PreparedStatement pqp = null;
+        this.conProduct = Conexion.getConecction();
+        String sql=null;
+        if(attribute.equals("Codigo")){
+            sql = "SELECT idproduct, nameProduct, description, unitMeasurement FROM product WHERE IdProduct LIKE '"+value+"%'";
+        }
+        else{
+            if(attribute.equals("Nombre")){
+                sql = "SELECT idproduct, nameProduct, description, unitMeasurement FROM product WHERE nameProduct LIKE '"+value+"%'";
+            }
+        }
+        
+        try{
+            pqp = conProduct.prepareStatement(sql);
+            rs = pqp.executeQuery();
+            ResultSetMetaData rsMd= rs.getMetaData();
+            cantProduct = rsMd.getColumnCount();
+        }catch(SQLException e){
+            System.err.println(e);
+        }
+        return rs;
+    }
 
     public void closeConnection() {
         try {

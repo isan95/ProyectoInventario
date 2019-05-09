@@ -77,8 +77,6 @@ public class Home extends javax.swing.JFrame {
         jLblStock = new javax.swing.JLabel();
         jTextStock = new javax.swing.JTextField();
         jTbOperaciones = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -167,7 +165,7 @@ public class Home extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTable1);
 
-        jButtonSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Find.png"))); // NOI18N
+        jButtonSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Find.png"))); // NOI18N
         jButtonSearch.setText("Buscar");
         jButtonSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -184,7 +182,7 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        jButtonRefresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/refresh.png"))); // NOI18N
+        jButtonRefresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/refresh.png"))); // NOI18N
         jButtonRefresh.setText("Actualizar");
         jButtonRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -236,7 +234,7 @@ public class Home extends javax.swing.JFrame {
                             .addGap(27, 27, 27)
                             .addComponent(jButtonRefresh)
                             .addGap(11, 11, 11))))
-                .addContainerGap(272, Short.MAX_VALUE))
+                .addContainerGap(252, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -263,7 +261,7 @@ public class Home extends javax.swing.JFrame {
 
         jTabbedPaneProduct.addTab("Lista de productos", jPanel4);
 
-        jBtnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Save_icon-icons.com_73702.png"))); // NOI18N
+        jBtnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Save_icon-icons.com_73702.png"))); // NOI18N
         jBtnSave.setText("Guardar");
         jBtnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -283,7 +281,7 @@ public class Home extends javax.swing.JFrame {
         jTextAreaDescription.setRows(5);
         jScrollPane1.setViewportView(jTextAreaDescription);
 
-        jLblImageProduct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/anonymous.png"))); // NOI18N
+        jLblImageProduct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/anonymous.png"))); // NOI18N
 
         jLblunit.setText("Unidad de medida");
 
@@ -323,7 +321,7 @@ public class Home extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 164, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLblunit)
                                 .addGap(34, 34, 34))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -379,35 +377,8 @@ public class Home extends javax.swing.JFrame {
 
         jTabbedPaneProduct.addTab("Crear producto", jPanel1);
 
-        jtbp.addTab("Producto", new javax.swing.ImageIcon(getClass().getResource("/GUI/business_inventory_maintenance_product_box_boxes_2326.png")), jTabbedPaneProduct); // NOI18N
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 860, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 484, Short.MAX_VALUE)
-        );
-
-        jTbOperaciones.addTab("Salidas", jPanel2);
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 860, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 484, Short.MAX_VALUE)
-        );
-
-        jTbOperaciones.addTab("Entradas", jPanel3);
-
-        jtbp.addTab("Operaciones", new javax.swing.ImageIcon(getClass().getResource("/GUI/at-operaciones-icon.png")), jTbOperaciones); // NOI18N
+        jtbp.addTab("Producto", new javax.swing.ImageIcon(getClass().getResource("/Images/business_inventory_maintenance_product_box_boxes_2326 (2).png")), jTabbedPaneProduct); // NOI18N
+        jtbp.addTab("Operaciones", new javax.swing.ImageIcon(getClass().getResource("/Images/at-operaciones-icon.png")), jTbOperaciones); // NOI18N
 
         jTabbedPane1.setAutoscrolls(true);
 
@@ -502,7 +473,7 @@ public class Home extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
                             .addGap(91, 91, 91)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(317, Short.MAX_VALUE))
+                .addContainerGap(297, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -569,7 +540,7 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(jTextNameUser))
                 .addGap(148, 148, 148)
                 .addComponent(jButtonSaveUser)
-                .addContainerGap(337, Short.MAX_VALUE))
+                .addContainerGap(317, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -609,7 +580,7 @@ public class Home extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Crear usuario", jPanel6);
 
-        jtbp.addTab("Usuario", new javax.swing.ImageIcon(getClass().getResource("/GUI/585e4bcdcb11b227491c3396 (2).png")), jTabbedPane1); // NOI18N
+        jtbp.addTab("Usuario", new javax.swing.ImageIcon(getClass().getResource("/Images/585e4bcdcb11b227491c3396 (2).png")), jTabbedPane1); // NOI18N
 
         jButtonSaveProvide.setText("Guardar");
         jButtonSaveProvide.addActionListener(new java.awt.event.ActionListener() {
@@ -661,7 +632,7 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(jComboBoxTypeProvide, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(91, 91, 91)
                 .addComponent(jButtonSaveProvide)
-                .addContainerGap(418, Short.MAX_VALUE))
+                .addContainerGap(398, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -732,7 +703,7 @@ public class Home extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(jTableProvider);
 
-        jComboBoxProvide.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nit o C.C", "Razon social", "Tipo" }));
+        jComboBoxProvide.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NIT o C.C", "Razon social", "Tipo" }));
 
         jButtonSearchProvide.setText("Buscar");
         jButtonSearchProvide.addActionListener(new java.awt.event.ActionListener() {
@@ -785,7 +756,7 @@ public class Home extends javax.swing.JFrame {
                         .addComponent(jButtonEditProvide)
                         .addGap(179, 179, 179)
                         .addComponent(jButtonDelProvide)))
-                .addContainerGap(283, Short.MAX_VALUE))
+                .addContainerGap(263, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -807,7 +778,7 @@ public class Home extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Lista de proveedores", jPanel7);
 
-        jtbp.addTab("Proveedor", new javax.swing.ImageIcon(getClass().getResource("/GUI/icono-proveedor-png.png")), jTabbedPane2); // NOI18N
+        jtbp.addTab("Proveedor", new javax.swing.ImageIcon(getClass().getResource("/Images/icono-proveedor-png.png")), jTabbedPane2); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1357,8 +1328,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLblStock;
     private javax.swing.JLabel jLblunit;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;

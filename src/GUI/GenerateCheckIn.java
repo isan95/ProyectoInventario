@@ -7,19 +7,30 @@ package GUI;
 
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author POLANCO
  */
 public class GenerateCheckIn extends javax.swing.JPanel {
-
+    private javax.swing.table.DefaultTableModel modelCheckIn;
     /**
      * Creates new form GenerateCheckIn
      */
     public GenerateCheckIn() {
         initComponents();
     }
+
+    public DefaultTableModel getModelCheckIn() {
+        return modelCheckIn;
+    }
+
+    public void setModelCheckIn(DefaultTableModel modelCheckIn) {
+        this.modelCheckIn = modelCheckIn;
+    }
+    
+    
 
     public JTable getjTableProductCheckIn() {
         return jTableProductCheckIn;
@@ -111,28 +122,13 @@ public class GenerateCheckIn extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jTextNIT = new javax.swing.JTextField();
 
-        jTableProductCheckIn.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Cant", "Producto", "Prec. unit", "Prec. tot"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTableProductCheckIn.setAutoscrolls(false);
+        modelCheckIn = new javax.swing.table.DefaultTableModel();
+        jTableProductCheckIn.setModel(modelCheckIn);
+        modelCheckIn.addColumn("Cant");
+        modelCheckIn.addColumn("Prod");
+        modelCheckIn.addColumn("Prec. Unit.");
+        modelCheckIn.addColumn("Prec. Tot.");
         jScrollPane1.setViewportView(jTableProductCheckIn);
-        jTableProductCheckIn.getAccessibleContext().setAccessibleParent(null);
 
         jLabel1.setText("Cliente");
 

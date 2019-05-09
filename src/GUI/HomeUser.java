@@ -9,9 +9,14 @@ import BusinessLogic.QueryClient;
 import BusinessLogic.QueryProduct;
 import BusinessLogic.QueryBill;
 import BusinessLogic.QueryBillProduct;
+import BusinessLogic.QueryCheckInProduct;
+import BusinessLogic.QueryProviderProduct;
+import BusinessLogic.QueryUser;
 import Data.Bill;
 import Data.BillProduct;
+import Data.CheckInProduct;
 import Data.Client;
+import Data.ProviderProduct;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.print.PageFormat;
@@ -27,6 +32,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
@@ -35,13 +41,15 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author POLANCO
  */
-public class HomeUser extends javax.swing.JFrame implements Printable{
+public class HomeUser extends javax.swing.JFrame implements Printable {
 
     private AddProduct frmAddProduct;
     private javax.swing.table.DefaultTableModel modelDetal;
+    private static javax.swing.table.DefaultTableModel modelProductIn;
     private String user;
-    private int subtotal=0;
+    private int subtotal = 0;
     private GenerateCheckIn generatedCheckIn = new GenerateCheckIn();
+
     /**
      * Creates new form HomeUser
      */
@@ -61,24 +69,60 @@ public class HomeUser extends javax.swing.JFrame implements Printable{
         this.user = user;
     }
 
+    public static JTable getjTableAddProductIn() {
+        return jTableAddProductIn;
+    }
+
+    public static void setjTableAddProductIn(JTable jTableAddProductIn) {
+        HomeUser.jTableAddProductIn = jTableAddProductIn;
+    }
+
+    public static JTextField getjTextNITCC() {
+        return jTextNITCC;
+    }
+
+    public static void setjTextNITCC(JTextField jTextNITCC) {
+        HomeUser.jTextNITCC = jTextNITCC;
+    }
+
+    public static JTextField getjTextNameProvider() {
+        return jTextNameProvider;
+    }
+
+    public static void setjTextNameProvider(JTextField jTextNameProvider) {
+        HomeUser.jTextNameProvider = jTextNameProvider;
+    }
+
+    public static DefaultTableModel getModelProductIn() {
+        return modelProductIn;
+    }
+
+    public static void setModelProductIn(DefaultTableModel modelProductIn) {
+        HomeUser.modelProductIn = modelProductIn;
+    }
+
     @Override
     public int print(Graphics grphcs, PageFormat pf, int i) throws PrinterException {
-        
+
         int cantProduct = modelDetal.getRowCount();
         generatedCheckIn.setjTextClient(jTextClientSelected);
         generatedCheckIn.setjTextSubTotal(jTextSubTotal);
         generatedCheckIn.setjTextTotal(jTextTotal);
         generatedCheckIn.setjTextIVA(jTextIVA);
-        for(int a=0;a<cantProduct;a++){
-            generatedCheckIn.getjTableProductCheckIn().getModel().setValueAt(modelDetal.getValueAt(a, 5), a, 0);//Agrega la cantidad
-            generatedCheckIn.getjTableProductCheckIn().getModel().setValueAt(modelDetal.getValueAt(a, 1), a, 1);//Agrega el no bre del producto
+        Object[] item = new Object[4];
+        for (int a = 0; a < cantProduct; a++) {
+            item[0] = modelDetal.getValueAt(a, 5);
+            item[1] = modelDetal.getValueAt(a, 1);
+            item[2] = "por ahora";
+            item[3] = "Otro por ahora";
+            generatedCheckIn.getModelCheckIn().addRow(item);
         }
-        
-        if(i>0){
+
+        if (i > 0) {
             return NO_SUCH_PAGE;
         }
-        Graphics2D grphCheckIn = (Graphics2D)grphcs;
-        grphCheckIn.translate(pf.getImageableX()+10,pf.getImageableY()+10);
+        Graphics2D grphCheckIn = (Graphics2D) grphcs;
+        grphCheckIn.translate(pf.getImageableX() + 10, pf.getImageableY() + 10);
         grphCheckIn.scale(1.0, 1.0);
         generatedCheckIn.printAll(grphcs);
         return PAGE_EXISTS;
@@ -93,7 +137,7 @@ public class HomeUser extends javax.swing.JFrame implements Printable{
             return this.tableColums[column];
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -134,8 +178,6 @@ public class HomeUser extends javax.swing.JFrame implements Printable{
         jLabel11 = new javax.swing.JLabel();
         jTextClientSelected = new javax.swing.JTextField();
         jPanelDetalles = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTableDetalle = new javax.swing.JTable();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTableDetal = new javax.swing.JTable();
         jButtonFrmAddProduct = new javax.swing.JButton();
@@ -151,10 +193,23 @@ public class HomeUser extends javax.swing.JFrame implements Printable{
         jTextIVA = new javax.swing.JTextField();
         jTextTotal = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jTextNITCC = new javax.swing.JTextField();
+        jTextNameProvider = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jButtonFrmAddProvider = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTableAddProductIn = new javax.swing.JTable();
+        jButtonFrmAddProductIn = new javax.swing.JButton();
+        jButtonInsertIn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.LEFT);
+        jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jCbSearchProFrmUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Codigo", "Nombre" }));
 
@@ -206,7 +261,7 @@ public class HomeUser extends javax.swing.JFrame implements Printable{
                 .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 611, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jCbSearchProFrmUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -227,8 +282,8 @@ public class HomeUser extends javax.swing.JFrame implements Printable{
                     .addComponent(jTextSearchProFrmUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbtSearchProFrmUser))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(296, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Productos", new javax.swing.ImageIcon(getClass().getResource("/Images/box.png")), jPanel1); // NOI18N
@@ -346,34 +401,6 @@ public class HomeUser extends javax.swing.JFrame implements Printable{
 
         jPanelDetalles.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista de productos"));
 
-        jTableDetalle.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Codigo", "Nombre", "Descripcion", "Precio", "Unidad de medida", "Cantidad"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane3.setViewportView(jTableDetalle);
-
         modelDetal = new javax.swing.table.DefaultTableModel();
         jTableDetal.setModel(modelDetal);
         modelDetal.addColumn("Codigo");
@@ -418,15 +445,10 @@ public class HomeUser extends javax.swing.JFrame implements Printable{
         jPanelDetallesLayout.setHorizontalGroup(
             jPanelDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelDetallesLayout.createSequentialGroup()
+                .addGap(77, 77, 77)
                 .addGroup(jPanelDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelDetallesLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelDetallesLayout.createSequentialGroup()
-                        .addGap(77, 77, 77)
-                        .addGroup(jPanelDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonFrmAddProduct)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jButtonFrmAddProduct)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(77, Short.MAX_VALUE))
         );
         jPanelDetallesLayout.setVerticalGroup(
@@ -436,9 +458,7 @@ public class HomeUser extends javax.swing.JFrame implements Printable{
                 .addComponent(jButtonFrmAddProduct)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(277, 277, 277)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Buscar Cliente"));
@@ -601,7 +621,7 @@ public class HomeUser extends javax.swing.JFrame implements Printable{
                 .addGap(18, 18, 18)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanelDetalles, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelDetalles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextSubTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -631,7 +651,7 @@ public class HomeUser extends javax.swing.JFrame implements Printable{
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane5))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -641,6 +661,109 @@ public class HomeUser extends javax.swing.JFrame implements Printable{
         );
 
         jTabbedPane1.addTab("Venta", new javax.swing.ImageIcon(getClass().getResource("/Images/icono-eficencia.png")), jPanel2); // NOI18N
+
+        jTextNITCC.setEditable(false);
+
+        jTextNameProvider.setEditable(false);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setText("Proveedor");
+
+        jLabel4.setText("NIT o C.C");
+
+        jLabel6.setText("Razon Social");
+
+        jButtonFrmAddProvider.setText("Agregar Proveedor");
+        jButtonFrmAddProvider.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFrmAddProviderActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setText("Lista de productos");
+
+        modelProductIn = new javax.swing.table.DefaultTableModel();
+        jTableAddProductIn.setModel(modelProductIn);
+        modelProductIn.addColumn("Codigo");
+        modelProductIn.addColumn("Nombre");
+        modelProductIn.addColumn("Descripcion");
+        modelProductIn.addColumn("Unidad de medida");
+        modelProductIn.addColumn("Cantidad");
+        jScrollPane6.setViewportView(jTableAddProductIn);
+
+        jButtonFrmAddProductIn.setText("Agregar Productos");
+        jButtonFrmAddProductIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFrmAddProductInActionPerformed(evt);
+            }
+        });
+
+        jButtonInsertIn.setText("Registrar ingreso");
+        jButtonInsertIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInsertInActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jTextNITCC, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextNameProvider, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(jButtonFrmAddProvider))
+                            .addComponent(jLabel7)
+                            .addComponent(jButtonFrmAddProductIn)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(jLabel4)
+                        .addGap(55, 55, 55)
+                        .addComponent(jLabel6))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonInsertIn)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(155, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonFrmAddProvider)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel6))
+                        .addGap(3, 3, 3)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextNameProvider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextNITCC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(53, 53, 53)
+                .addComponent(jLabel7)
+                .addGap(14, 14, 14)
+                .addComponent(jButtonFrmAddProductIn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonInsertIn)
+                .addContainerGap(229, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Ingreso de productos", new javax.swing.ImageIcon(getClass().getResource("/Images/WEB-FCH-FINAL-PARA-MARIO-40 (1).png")), jPanel3); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -855,13 +978,13 @@ public class HomeUser extends javax.swing.JFrame implements Printable{
             String[] elementId = new String[row];
             int[] elementCant = new int[row];
             String auxId = new String();
-            int auxCant = 0; 
+            int auxCant = 0;
             for (int i = 0; i < row; i++) {
                 //Problema no se de donde
                 auxId = modelDetal.getValueAt(i, 0).toString();
-                auxCant = Integer.parseInt(modelDetal.getValueAt(i,5).toString());
+                auxCant = Integer.parseInt(modelDetal.getValueAt(i, 5).toString());
                 elementId[i] = auxId;
-                elementCant[i]=auxCant;
+                elementCant[i] = auxCant;
             }
 
             ResultSet lastBill = null;
@@ -885,18 +1008,65 @@ public class HomeUser extends javax.swing.JFrame implements Printable{
             PrinterJob pj = PrinterJob.getPrinterJob();
             pj.setPrintable(this);
             boolean top = pj.printDialog();
-            if(top){
+            if (top) {
                 try {
                     pj.print();
                 } catch (PrinterException ex) {
                     Logger.getLogger(HomeUser.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            JOptionPane.showMessageDialog(this,"Factura registrada correctamente");
+            JOptionPane.showMessageDialog(this, "Factura registrada correctamente");
         }
     }//GEN-LAST:event_jButtonCheckInActionPerformed
-    
-    
+
+    private void jButtonFrmAddProductInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFrmAddProductInActionPerformed
+        AddProductIn frmAddProduct = new AddProductIn(this, true);
+        frmAddProduct.setVisible(true);
+    }//GEN-LAST:event_jButtonFrmAddProductInActionPerformed
+
+    private void jButtonFrmAddProviderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFrmAddProviderActionPerformed
+        AddProvider frmAddProvider = new AddProvider(this, true);
+        frmAddProvider.setVisible(true);
+    }//GEN-LAST:event_jButtonFrmAddProviderActionPerformed
+
+    private void jButtonInsertInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInsertInActionPerformed
+        QueryProviderProduct qpp = new QueryProviderProduct();
+        QueryCheckInProduct qcip = new QueryCheckInProduct();
+        QueryUser qu = new QueryUser();
+        ProviderProduct pp = new ProviderProduct();
+        CheckInProduct cip = new CheckInProduct();
+        int cantProduct = 0;
+        String documentUser = qu.getUserForNick(user);
+        System.out.println(documentUser);
+        /*
+        if (!jTextNITCC.getText().equals("") && (modelProductIn.getRowCount()) > 0) {
+            cip.setProvider(jTextNITCC.getText());
+            cip.setUser(documentUser);
+            if (qcip.insertCheckInProduct(cip)) {
+                cantProduct = modelProductIn.getRowCount();
+                int i = 0;
+                String lastCheckInProduct = qcip.lastCheckInProduct();
+                for (i = 0; i < cantProduct; i++) {
+                    pp.setIdProdcut(modelProductIn.getValueAt(i, 0).toString());
+                    pp.setCant(Integer.parseInt(modelProductIn.getValueAt(i, 4).toString()));
+                    if (!qpp.insertProviderProduct(pp)) {
+                        JOptionPane.showMessageDialog(this, "Ocurrió un problema al registrar el ingreso");
+                        break;
+                    }
+                }
+
+                if (i == cantProduct) {
+                    JOptionPane.showMessageDialog(this, "Ingreso de productos registrado exitosamente");
+                }
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Campos requeridos se encuentran vacios");
+        }
+
+            */
+    }//GEN-LAST:event_jButtonInsertInActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -939,6 +1109,9 @@ public class HomeUser extends javax.swing.JFrame implements Printable{
     private javax.swing.ButtonGroup buttonGroupClient;
     private javax.swing.JButton jButtonCheckIn;
     private javax.swing.JButton jButtonFrmAddProduct;
+    private javax.swing.JButton jButtonFrmAddProductIn;
+    private javax.swing.JButton jButtonFrmAddProvider;
+    private javax.swing.JButton jButtonInsertIn;
     private javax.swing.JComboBox<String> jCBSearchClient;
     private javax.swing.JComboBox<String> jCbSearchProFrmUser;
     private javax.swing.JLabel jLabel1;
@@ -949,11 +1122,16 @@ public class HomeUser extends javax.swing.JFrame implements Printable{
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanelDetalles;
@@ -962,14 +1140,14 @@ public class HomeUser extends javax.swing.JFrame implements Printable{
     private javax.swing.JRadioButton jRadioButtonOldClient;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable2;
+    private static javax.swing.JTable jTableAddProductIn;
     private javax.swing.JTable jTableClient;
     private static javax.swing.JTable jTableDetal;
-    private javax.swing.JTable jTableDetalle;
     private javax.swing.JTextField jTextClientSelected;
     private javax.swing.JTextField jTextEmailClient;
     private javax.swing.JTextField jTextFLastName;
@@ -977,7 +1155,9 @@ public class HomeUser extends javax.swing.JFrame implements Printable{
     private javax.swing.JTextField jTextIVA;
     private javax.swing.JTextField jTextIdClient;
     private javax.swing.JTextField jTextLLastName;
+    private static javax.swing.JTextField jTextNITCC;
     private javax.swing.JTextField jTextNameClient;
+    private static javax.swing.JTextField jTextNameProvider;
     private javax.swing.JTextField jTextPhoneClient;
     private javax.swing.JTextField jTextSearchProFrmUser;
     private javax.swing.JTextField jTextSubTotal;

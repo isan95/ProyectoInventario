@@ -186,8 +186,42 @@ public class QueryUser {
             delete = true;
         } catch (SQLException e) {
             System.err.print(e);
+        } finally {
+            try {
+                conController.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
         }
 
         return delete;
+    }
+
+    public String getUserForNick(String nick) {
+        String sql = "SELECT document_user FROM userinventario WHERE Nick = '" + nick + "'";
+        PreparedStatement ps = null;
+        String document = null;
+        try {
+            conController = Conexion.getConecction();
+            ps = conController.prepareStatement(sql);
+            rs = ps.executeQuery();
+            try {
+                while (rs.next()) {
+                    document = rs.getString(1);
+                }
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        } catch (SQLException e) {
+            System.err.println(e);
+        } finally {
+            try {
+                conController.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+
+        return document;
     }
 }

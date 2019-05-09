@@ -5,16 +5,24 @@
         <group>
             <file>file:/C:/Users/POLANCO/Documents/NetBeansProjects/ProyectoInventario/src/BusinessLogic/QueryBillProduct.java</file>
             <file>file:/C:/Users/POLANCO/Documents/NetBeansProjects/ProyectoInventario/src/GUI/AddProduct.java</file>
-            <file>file:/C:/Users/POLANCO/Documents/NetBeansProjects/ProyectoInventario/src/GUI/Home.java</file>
+            <file>file:/C:/Users/POLANCO/Documents/NetBeansProjects/ProyectoInventario/src/GUI/AddProvider.java</file>
+            <file>file:/C:/Users/POLANCO/Documents/NetBeansProjects/ProyectoInventario/src/BusinessLogic/QueryProviderProduct.java</file>
+            <file>file:/C:/Users/POLANCO/Documents/NetBeansProjects/ProyectoInventario/src/Data/CheckInProduct.java</file>
             <file>file:/C:/Users/POLANCO/Documents/NetBeansProjects/ProyectoInventario/src/BusinessLogic/QueryProduct.java</file>
             <file>file:/C:/Users/POLANCO/Documents/NetBeansProjects/ProyectoInventario/src/Data/Bill.java</file>
-            <file>file:/C:/Users/POLANCO/Documents/NetBeansProjects/ProyectoInventario/src/BusinessLogic/QueryUser.java</file>
             <file>file:/C:/Users/POLANCO/Documents/NetBeansProjects/ProyectoInventario/src/GUI/Principal.java</file>
             <file>file:/C:/Users/POLANCO/Documents/NetBeansProjects/ProyectoInventario/src/GUI/HomeUser.java</file>
             <file>file:/C:/Users/POLANCO/Documents/NetBeansProjects/ProyectoInventario/src/BusinessLogic/QueryBill.java</file>
             <file>file:/C:/Users/POLANCO/Documents/NetBeansProjects/ProyectoInventario/src/Data/BillProduct.java</file>
             <file>file:/C:/Users/POLANCO/Documents/NetBeansProjects/ProyectoInventario/src/BusinessLogic/QueryClient.java</file>
             <file>file:/C:/Users/POLANCO/Documents/NetBeansProjects/ProyectoInventario/src/Data/Client.java</file>
+            <file>file:/C:/Users/POLANCO/Documents/NetBeansProjects/ProyectoInventario/src/GUI/AddProductIn.java</file>
+            <file>file:/C:/Users/POLANCO/Documents/NetBeansProjects/ProyectoInventario/src/Data/ProviderProduct.java</file>
+            <file>file:/C:/Users/POLANCO/Documents/NetBeansProjects/ProyectoInventario/src/BusinessLogic/QueryCheckInProduct.java</file>
+            <file>file:/C:/Users/POLANCO/Documents/NetBeansProjects/ProyectoInventario/src/BusinessLogic/QueryProvide.java</file>
+            <file>file:/C:/Users/POLANCO/Documents/NetBeansProjects/ProyectoInventario/src/GUI/GenerateCheckIn.java</file>
+            <file>file:/C:/Users/POLANCO/Documents/NetBeansProjects/ProyectoInventario/src/GUI/Home.java</file>
+            <file>file:/C:/Users/POLANCO/Documents/NetBeansProjects/ProyectoInventario/src/BusinessLogic/QueryUser.java</file>
         </group>
     </open-files>
 </project-private>

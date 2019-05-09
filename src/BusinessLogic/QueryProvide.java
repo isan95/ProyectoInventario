@@ -84,7 +84,7 @@ public class QueryProvide {
         this.connProvide = Conexion.getConecction();
         switch (attribute) {
             case "NIT o C.C":
-                sql = "SELECT NIT_CC,business_name, phone, adress, e_mail, type FROM provider WHERE NIT_CC" + " = '" + value + "'";
+                sql = "SELECT NIT_CC,business_name, phone, adress, e_mail, type FROM provider WHERE NIT_CC LIKE" + "'" + value + "%'";
                 break;
             case "Razon social":
                 sql = "SELECT NIT_CC,business_name, phone, adress, e_mail, type FROM provider WHERE business_name LIKE" + " '%" + value + "%'";
@@ -141,4 +141,12 @@ public class QueryProvide {
         }
         return updated;
     }
+     public void closeConnection(){
+         try{
+             connProvide.close();
+         }
+         catch(SQLException e){
+             System.out.println(e);
+         }
+     }
 }
