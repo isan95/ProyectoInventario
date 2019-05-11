@@ -224,4 +224,27 @@ public class QueryUser {
 
         return document;
     }
+    
+    public boolean getOldPassword(String pass){
+        conController = Conexion.getConecction();
+        String sql = "SELECT COUNT(document_user) FROM userinventario WHERE password = '"+pass+"'";
+        PreparedStatement ps = null;
+        int i=0;
+        try{
+            ps = conController.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                i=rs.getInt(1);
+            }
+            if(i==1){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }catch(SQLException e){
+            System.out.println(e);
+            return false;
+        }
+    }
 }

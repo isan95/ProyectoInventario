@@ -22,13 +22,14 @@ public class QueryProviderProduct {
     private int cantProviProd;
     
     public boolean insertProviderProduct(ProviderProduct pp){
-        String sql = "INSERT INTO provider_product (IdProduct, cant_provider_product) VALUES (?,?)";
+        String sql = "INSERT INTO provider_product (id_checkin_product,IdProduct, cant_provider_product) VALUES (?,?,?)";
         PreparedStatement ps=null;
         connProviderProduct =Conexion.getConecction();
         try{
             ps = connProviderProduct.prepareStatement(sql);
-            ps.setString(1, pp.getIdProdcut());
-            ps.setInt(2, pp.getCant());
+            ps.setString(1, pp.getCheckInProduct());
+            ps.setString(2, pp.getIdProdcut());
+            ps.setInt(3, pp.getCant());
             ps.execute();
             return true;
         }catch(SQLException e){

@@ -10,9 +10,20 @@ package Data;
  * @author POLANCO
  */
 public class ProviderProduct {
+    String checkInProduct;
     String idProdcut;
     int cant;
-  
+
+    public String getCheckInProduct() {
+        return checkInProduct;
+    }
+
+    public void setCheckInProduct(String checkInProduct) {
+        this.checkInProduct = checkInProduct;
+    }
+    
+    
+    
     public String getIdProdcut() {
         return idProdcut;
     }
