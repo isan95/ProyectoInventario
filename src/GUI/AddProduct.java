@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 public class AddProduct extends javax.swing.JDialog {
     private String[] values;
     private javax.swing.table.DefaultTableModel model;
+    private int origin=0; 
 
     public String[] getValues() {
         return values;
@@ -31,6 +32,14 @@ public class AddProduct extends javax.swing.JDialog {
         return jButtonAddProduct;
     }
 
+    public int getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(int origin) {
+        this.origin = origin;
+    }
+    
     /**
      * Creates new form AddProduct
      */
@@ -184,7 +193,16 @@ public class AddProduct extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextSearchProductAddKeyTyped
 
     private void jButtonAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddProductActionPerformed
-       DefaultTableModel model = (DefaultTableModel) HomeUser.getjTableDetal().getModel();
+       DefaultTableModel model = null; 
+        if(origin==2){
+            model = (DefaultTableModel) HomeUser.getjTableDetal().getModel();
+        }
+        else{
+            if(origin==1){
+            model = (DefaultTableModel) Home.getjTableDetal().getModel();
+        }
+        }
+       
        int row = jTableAddProduct.getSelectedRow();
        values = new String[jTableAddProduct.getColumnCount()];
        values[jTableAddProduct.getColumnCount()-1] = "1";

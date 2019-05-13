@@ -52,6 +52,8 @@ public class HomeUser extends javax.swing.JFrame implements Printable {
     private String user;
     private int subtotal = 0;
     private GenerateCheckIn generatedCheckIn = new GenerateCheckIn();
+    private boolean samePass = false;
+    private boolean correctPassOld = false;
 
     /**
      * Creates new form HomeUser
@@ -228,6 +230,10 @@ public class HomeUser extends javax.swing.JFrame implements Printable {
         jButtonSaveChangePass = new javax.swing.JButton();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -672,9 +678,10 @@ public class HomeUser extends javax.swing.JFrame implements Printable {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -890,22 +897,57 @@ public class HomeUser extends javax.swing.JFrame implements Printable {
         });
 
         jPasswordNew.setVisible(false);
+        jPasswordNew.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jPasswordNewKeyTyped(evt);
+            }
+        });
 
         jPasswordConfirm.setVisible(false);
+        jPasswordConfirm.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jPasswordConfirmKeyTyped(evt);
+            }
+        });
 
         jButtonSaveChangePass.setVisible(false);
         jButtonSaveChangePass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/boton-guardar-png-4.png"))); // NOI18N
         jButtonSaveChangePass.setText("Guardar");
+        jButtonSaveChangePass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSaveChangePassActionPerformed(evt);
+            }
+        });
 
-        jLabel22.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
-        jLabel22.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel22.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(255, 0, 51));
         jLabel22.setText("Contraseña incorrecta");
         jLabel22.setVisible(false);
 
-        jLabel23.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
-        jLabel23.setForeground(new java.awt.Color(0, 255, 102));
+        jLabel23.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(0, 204, 51));
         jLabel23.setText("Contraseña correcta");
         jLabel23.setVisible(false);
+
+        jLabel24.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(255, 0, 51));
+        jLabel24.setText("Contraseñas no coinciden");
+        jLabel24.setVisible(false);
+
+        jLabel25.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(0, 204, 51));
+        jLabel25.setText("Contraseñas coinciden");
+        jLabel25.setVisible(false);
+
+        jLabel26.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(255, 0, 51));
+        jLabel26.setText("Contraseñas no coinciden");
+        jLabel26.setVisible(false);
+
+        jLabel27.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(0, 204, 51));
+        jLabel27.setText("Contraseñas coinciden");
+        jLabel27.setVisible(false);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -919,25 +961,38 @@ public class HomeUser extends javax.swing.JFrame implements Printable {
                         .addGap(79, 79, 79)
                         .addComponent(jButton3))
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(182, 182, 182)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(jLabel21)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jPasswordConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(182, 182, 182)
+                                .addComponent(jLabel19)
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel20)
+                                .addGap(33, 33, 33)))
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel19)
-                                    .addComponent(jLabel20))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jPasswordOld)
-                                    .addComponent(jPasswordNew)
-                                    .addGroup(jPanel7Layout.createSequentialGroup()
-                                        .addComponent(jLabel22)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel23)))))))
-                .addContainerGap(136, Short.MAX_VALUE))
+                                .addComponent(jLabel24)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel25))
+                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel7Layout.createSequentialGroup()
+                                    .addComponent(jLabel22)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jLabel23))
+                                .addComponent(jPasswordOld, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                                .addComponent(jPasswordNew))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                        .addGap(182, 182, 182)
+                        .addComponent(jLabel21)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(jLabel26)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel27))
+                            .addComponent(jPasswordConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(122, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButtonSaveChangePass)
@@ -954,21 +1009,29 @@ public class HomeUser extends javax.swing.JFrame implements Printable {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
                     .addComponent(jPasswordOld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel22)
-                    .addComponent(jLabel23))
-                .addGap(17, 17, 17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel23)
+                    .addComponent(jLabel22))
+                .addGap(32, 32, 32)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
                     .addComponent(jPasswordNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(57, 57, 57)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel24)
+                    .addComponent(jLabel25))
+                .addGap(23, 23, 23)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
                     .addComponent(jPasswordConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
+                .addGap(1, 1, 1)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel26)
+                    .addComponent(jLabel27))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonSaveChangePass)
-                .addContainerGap(156, Short.MAX_VALUE))
+                .addContainerGap(158, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cuenta de usuario", new javax.swing.ImageIcon(getClass().getResource("/Images/585e4bcdcb11b227491c3396 (2).png")), jPanel7); // NOI18N
@@ -983,7 +1046,7 @@ public class HomeUser extends javax.swing.JFrame implements Printable {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 72, Short.MAX_VALUE))
+                .addGap(0, 37, Short.MAX_VALUE))
         );
 
         pack();
@@ -1129,6 +1192,7 @@ public class HomeUser extends javax.swing.JFrame implements Printable {
 
     private void jButtonFrmAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFrmAddProductActionPerformed
         frmAddProduct.setVisible(true);
+        frmAddProduct.setOrigin(2);
     }//GEN-LAST:event_jButtonFrmAddProductActionPerformed
 
     private void jCBSearchClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBSearchClientActionPerformed
@@ -1306,15 +1370,85 @@ public class HomeUser extends javax.swing.JFrame implements Printable {
     private void jPasswordOldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordOldKeyTyped
         QueryUser qucp = new QueryUser();
         String passOld = new String(jPasswordOld.getPassword()); 
-        if(qucp.getOldPassword(DigestUtils.sha1Hex(passOld))){
+        if(qucp.getOldPassword(DigestUtils.sha1Hex(passOld),user)){
             jLabel23.setVisible(true);
             jLabel22.setVisible(false);
+            correctPassOld = true;
         }
         else{
             jLabel22.setVisible(true);
             jLabel23.setVisible(false);
+            correctPassOld = false;
         }
     }//GEN-LAST:event_jPasswordOldKeyTyped
+
+    private void jPasswordNewKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordNewKeyTyped
+        String passwordNew = new String(jPasswordNew.getPassword());
+        String passwordConfirm = new String(jPasswordConfirm.getPassword());
+        if(passwordNew.equals(passwordConfirm )){
+            jLabel25.setVisible(true);
+            jLabel27.setVisible(true);
+            jLabel24.setVisible(false);
+            jLabel26.setVisible(false);
+            samePass = true;
+        }
+        else{
+            if(!passwordNew.equals(passwordConfirm )){
+                jLabel25.setVisible(false);
+                jLabel27.setVisible(false);
+                jLabel24.setVisible(true);
+                jLabel26.setVisible(true);
+                samePass = false;
+            }
+            
+        }
+    }//GEN-LAST:event_jPasswordNewKeyTyped
+
+    private void jPasswordConfirmKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordConfirmKeyTyped
+        String passwordNew = new String(jPasswordNew.getPassword());
+        String passwordConfirm = new String(jPasswordConfirm.getPassword());
+        if(passwordNew.equals(passwordConfirm )){
+            jLabel25.setVisible(true);
+            jLabel27.setVisible(true);
+            jLabel24.setVisible(false);
+            jLabel26.setVisible(false);
+            samePass = true;
+        }
+        else{
+            if(!passwordNew.equals(passwordConfirm )){
+                jLabel25.setVisible(false);
+                jLabel27.setVisible(false);
+                jLabel24.setVisible(true);
+                jLabel26.setVisible(true);
+                samePass = false;
+            }
+            
+        }
+    }//GEN-LAST:event_jPasswordConfirmKeyTyped
+
+    private void jButtonSaveChangePassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveChangePassActionPerformed
+        QueryUser qucp = new QueryUser();
+        if(!jPasswordOld.equals("") && !jPasswordNew.equals("") && !jPasswordConfirm.equals("")){
+            String newPass = new String(jPasswordNew.getPassword());
+            if(samePass && correctPassOld){
+                if(qucp.passwordChange(DigestUtils.sha1Hex(newPass), user)){
+                    JOptionPane.showMessageDialog(this,"Contraseña cambiada exitosamente");
+                }
+                else{
+                    JOptionPane.showMessageDialog(this,"Error al registrar el cambio de contraseña");
+                }
+            }
+            
+            else{
+                JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden");
+            }
+        }
+        else{
+            if(jPasswordOld.equals("") && jPasswordNew.equals("") && jPasswordConfirm.equals("")){
+                JOptionPane.showMessageDialog(this,"Campos requeridos se encuentran vacios");
+            }            
+        }
+    }//GEN-LAST:event_jButtonSaveChangePassActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1383,6 +1517,10 @@ public class HomeUser extends javax.swing.JFrame implements Printable {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

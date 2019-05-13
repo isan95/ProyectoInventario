@@ -55,7 +55,7 @@ public class QueryUser {
     public boolean insertUser(User usr) {
         PreparedStatement pqi = null;
         Connection conControllerI = Conexion.getConecction();
-        String sql = "INSERT INTO userinventario (Nick,Nombre,Password,Primer_apellido, Segundo_apellido, Rol) VALUES (?,?,?,?,?,?)";
+        String sql = "INSERT INTO userinventario (Nick,Nombre,Password,Primer_apellido, Segundo_apellido, Rol, document_user) VALUES (?,?,?,?,?,?,?)";
         try {
             pqi = conControllerI.prepareStatement(sql);
             pqi.setString(1, usr.getNick());
@@ -64,6 +64,7 @@ public class QueryUser {
             pqi.setString(4, usr.getpApellido());
             pqi.setString(5, usr.getsApellido());
             pqi.setInt(6, usr.getRol());
+            pqi.setString(7, usr.getDocument());
             pqi.execute();
             return true;
         } catch (SQLException e) {
@@ -225,9 +226,9 @@ public class QueryUser {
         return document;
     }
     
-    public boolean getOldPassword(String pass){
+    public boolean getOldPassword(String pass, String user){
         conController = Conexion.getConecction();
-        String sql = "SELECT COUNT(document_user) FROM userinventario WHERE password = '"+pass+"'";
+        String sql = "SELECT COUNT(document_user) FROM userinventario WHERE password = '"+pass+"' AND Nick = '"+user+"'";
         PreparedStatement ps = null;
         int i=0;
         try{
@@ -245,6 +246,27 @@ public class QueryUser {
         }catch(SQLException e){
             System.out.println(e);
             return false;
+        }
+    }
+    
+    public boolean passwordChange(String newPass, String user){
+        conController = Conexion.getConecction();
+        PreparedStatement ps = null;
+        try{
+            String sql = null;
+            sql = "UPDATE userinventario SET password ='"+newPass+"' WHERE Nick ='"+user+"'";
+            ps = conController.prepareStatement(sql);
+            ps.execute();
+            return true;
+        }catch(SQLException e){
+            System.err.println(e);
+            return false;
+        }finally{
+            try{
+                conController.close();
+            }catch(SQLException e){
+                System.err.println(e);
+            }
         }
     }
 }

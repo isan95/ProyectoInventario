@@ -12,6 +12,7 @@ import javax.swing.JTextField;
  * @author POLANCO
  */
 public class User {
+   private String document;
    private String nick;
    private String password;
    private String name;
@@ -27,6 +28,16 @@ public class User {
     public void setNick(String nick) {
         this.nick = nick;
     }
+
+    public String getDocument() {
+        return document;
+    }
+
+    public void setDocument(String document) {
+        this.document = document;
+    }
+    
+    
 
     public String getPassword() {
         return password;
