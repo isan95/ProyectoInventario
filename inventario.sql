@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 11-05-2019 a las 04:59:00
+-- Tiempo de generación: 13-05-2019 a las 19:14:53
 -- Versión del servidor: 5.7.24
 -- Versión de PHP: 7.2.14
 
@@ -69,7 +69,8 @@ INSERT INTO bill (id_bill, `date`, id_client, id_seller, Subtotal, IVA, Total) V
 (40, '2019-05-05 13:36:25', '105044548', 'MariaIsabel', 5500, 1045, 6545),
 (41, '2019-05-05 13:40:16', '105044548', 'MariaIsabel', 473300, 89927, 563227),
 (42, '2019-05-05 16:00:27', '105044548', 'MariaIsabel', 473300, 89927, 563227),
-(43, '2019-05-05 18:17:02', '15564652', 'MariaIsabel', 473300, 89927, 563227);
+(43, '2019-05-05 18:17:02', '15564652', 'MariaIsabel', 473300, 89927, 563227),
+(44, '2019-05-13 13:46:42', '105044548', 'isan', 5500, 1045, 6545);
 
 -- --------------------------------------------------------
 
@@ -182,7 +183,9 @@ INSERT INTO bill_product (id_bill, IdProduct, Cant) VALUES
 (43, '10013', 1),
 (43, '10014', 1),
 (43, '10015', 1),
-(43, '10016', 1);
+(43, '10016', 1),
+(44, '10006', 1),
+(44, '10002', 1);
 
 --
 -- Disparadores bill_product
@@ -286,8 +289,8 @@ CREATE TABLE product (
 --
 
 INSERT INTO product (IdProduct, nameProduct, description, price, unitMeasurement, stock) VALUES
-('10006', 'Nylon', 'Grueso', 3000, 'Metros', 240),
-('10002', 'ñeque', 'agua mala de 250 ml', 2500, 'Cantidad', 240),
+('10006', 'Nylon', 'Grueso', 3000, 'Metros', 239),
+('10002', 'ñeque', 'agua mala de 250 ml', 2500, 'Cantidad', 239),
 ('10003', 'Cocacola', '250 ml', 1600, 'Cantidad', 166),
 ('10004', 'Postobon Manzana 250', '250 ml', 1200, 'Cantidad', 66),
 ('10005', 'Pepsi 300 ml', '300 ml', 1600, 'Cantidad', 66),
@@ -418,7 +421,8 @@ CREATE TABLE userinventario (
 --
 
 INSERT INTO userinventario (document_user, Nick, `Password`, Nombre, Primer_apellido, Segundo_apellido, Rol) VALUES
-('1002568', 'MariaIsabel', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'Maria', 'Martinez', 'De Polanco', 2);
+('1002568', 'MariaIsabel', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'Maria', 'Martinez', 'De Polanco', 2),
+('1050067213', 'isan', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'Ismael', 'Polanco', 'Payares', 1);
 
 --
 -- Índices para tablas volcadas
@@ -507,7 +511,7 @@ ALTER TABLE userinventario
 -- AUTO_INCREMENT de la tabla bill
 --
 ALTER TABLE bill
-  MODIFY id_bill bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY id_bill bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT de la tabla checkin_product
